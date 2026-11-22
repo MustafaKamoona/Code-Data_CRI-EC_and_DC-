@@ -1,0 +1,34 @@
+{
+  "title": "CRI: Measurement-Driven Control Readiness Index (EC-CRI and DC-CRI)",
+  "upload_type": "software",
+  "version": "v1.0.0",
+  "description": "<p>Research software, simulation models, recorded datasets, and reproducible notebooks for the measurement-driven Control Readiness Index (CRI): a plant-agnostic supervisory layer that decides online, from input-output data, operational limits, and measurement quality alone, whether an adaptive, learning-based, or optimization-driven controller should be given authority over a plant, and otherwise keeps a fallback controller in charge.</p><p>The package provides Engineering-Configured CRI (EC-CRI); Data-Calibrated CRI (DC-CRI) with risk-constrained calibration of indicator weights and decision thresholds and leave-one-scenario-out (LOSO) evaluation; a comparative benchmark against Simplex runtime assurance and a discrete-time control-barrier-function safety filter; and a Measurement Validity Gate with fault-injection and recovery tests. The framework is demonstrated and validated on a converter-dominated hybrid AC/DC microgrid case study, and its interfaces allow it to be applied to other controllers, plants, and hardware-in-the-loop or experimental targets in industrial cyber-physical systems.</p>",
+  "creators": [
+    {
+      "name": "Mustafa A. Kamoona",
+      "affiliation": "University of Seville",
+      "orcid": "0000-0002-2873-6218"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Mauricio, Juan Manuel",
+      "type": "Supervisor",
+      "affiliation": "Universidad de Sevilla",
+      "orcid": "0000-0002-5702-0198"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "control readiness",
+    "safe controller activation",
+    "supervisory control",
+    "data-driven calibration",
+    "leave-one-scenario-out validation",
+    "runtime assurance",
+    "control barrier functions",
+    "industrial cyber-physical systems",
+    "hybrid AC/DC microgrid"
+  ]
+}

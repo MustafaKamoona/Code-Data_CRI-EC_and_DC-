@@ -10,10 +10,17 @@ released as a plant-agnostic package ready for any team's own controller, plant,
 ![NumPy](https://img.shields.io/badge/numpy-required-informational)
 ![Status](https://img.shields.io/badge/status-simulation--validated-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23891298.svg)](https://doi.org/10.5281/zenodo.23891298)
 
 This repository contains the complete simulation framework, controller and CRI implementation,
 benchmark and validation modules, recorded results, and reproducible notebooks.
+
+The readiness layer itself is plant-agnostic: it needs only input-output measurements, operational
+limits, and a fallback controller, so it can supervise adaptive, learning-based, or
+optimization-driven controllers in other industrial cyber-physical systems, such as power
+converters, process plants, or motion systems. The hybrid AC/DC microgrid is the reference case
+study used to validate it; see
+[Extending the Framework](#extending-the-framework-bring-your-own-controller-plant-or-hardware)
+for applying it to a new controller, plant, or hardware target.
 
 The framework ships in two commissioning modes of the same CRI architecture --
 **Engineering-Configured CRI (EC-CRI)**, a fixed, engineering-tuned configuration, and
@@ -26,7 +33,7 @@ The release also includes a comparative benchmark against **runtime-assurance (S
 **control-barrier-function (CBF)** supervision, and a **Measurement Validity Gate** with
 fault-injection and recovery tests.
 
-**Version:** v1.0.4 &nbsp;|&nbsp; **Last updated:** 2026-11-21
+**Version:** v1.0.0 &nbsp;|&nbsp; **Last updated:** 2026-11-22
 
 ---
 
@@ -822,12 +829,10 @@ supplementary results:
 
 ## Citation and Archiving
 
-Each release of this repository is archived on Zenodo. To cite the software (all versions), use the
-concept DOI [10.5281/zenodo.23891298](https://doi.org/10.5281/zenodo.23891298); the Zenodo record
-also lists the DOI of each individual version.
+Releases of this repository are archived on Zenodo; the DOI will be listed here once assigned.
 
 > M. A. Kamoona, *CRI: Measurement-Driven Control Readiness Index (EC-CRI and DC-CRI)*, software,
-> Zenodo, doi: 10.5281/zenodo.23891298.
+> version v1.0.0, https://github.com/MustafaKamoona/Code-Data_CRI-EC_and_DC-
 
 Data and code are also archived at IEEE DataPort, DOI: 10.21227/wv4k-z538.
 
@@ -846,9 +851,8 @@ Cyber prOtectiON for modern power grids) under Grant 101120221 and SUNRISE under
 ## Contact
 
 **Mustafa A. Kamoona** -- Department of Electrical Engineering, Universidad de Sevilla, Seville, Spain
-Corresponding author: muskam@alum.us.es, mustafazzasim@gmail.com
+Email: muskam@alum.us.es, mustafazzasim@gmail.com
 
 **Juan Manuel Mauricio** -- Department of Electrical Engineering, Universidad de Sevilla, Seville, Spain
 
 For questions, issues, or collaboration inquiries, please open a GitHub issue on this repository.
-"# Code-Data_CRI-EC_and_DC-" 
