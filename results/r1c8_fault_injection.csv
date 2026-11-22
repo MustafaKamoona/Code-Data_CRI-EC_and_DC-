@@ -1,0 +1,23 @@
+exception,completed,s1_samples_in_fault,fault_samples,s1_samples_after_onset_before_t1_plus_1s,reactivation_after_fault_end_s,n_violation_true,case,scenario,gate,detected,detect_delay_s,invalid_samples,reasons,dt_flag_pct_in_fault,cri_resets,nonfinite_reaching_cri
+k=750 t=15.00s LinAlgError: SVD did not converge,False,0,0,0,,0,F1 single NaN (Vdc),S1,none,,,,,,,
+,True,0,1,11,0.7800000000000011,0,F1 single NaN (Vdc),S1,MVG,True,0.0,1.0,nonfinite,100.0,1.0,0.0
+k=750 t=15.00s LinAlgError: SVD did not converge,False,0,0,0,,0,F2 dropout 0.5 s (all NaN),S1,none,,,,,,,
+,True,0,25,11,0.7800000000000011,12,F2 dropout 0.5 s (all NaN),S1,MVG,True,0.0,25.0,nonfinite,100.0,1.0,0.0
+,True,24,25,34,0.8000000000000007,0,F3 stale 0.5 s (timestamps),S1,none,,,,,,,
+,True,0,25,11,0.7800000000000011,12,F3 stale 0.5 s (timestamps),S1,MVG,True,0.0,25.0,stale,100.0,1.0,0.0
+,True,24,25,34,0.8000000000000007,0,F4 stale 0.5 s (no timestamps),S1,none,,,,,,,
+,True,9,25,20,0.7800000000000011,2,F4 stale 0.5 s (no timestamps),S1,MVG,True,0.17999999999999972,16.0,frozen,92.0,1.0,0.0
+,True,36,1251,36,,0,F5 3-sample delay (persistent),S1,none,,,,,,,
+,True,0,1251,0,,0,F5 3-sample delay (persistent),S1,MVG,True,0.0,1251.0,stale,100.0,0.0,0.0
+,True,500,500,550,0.0,0,F6 frozen V1 for 10 s,S1,none,,,,,,,
+,True,9,500,20,0.7800000000000011,0,F6 frozen V1 for 10 s,S1,MVG,True,0.17999999999999972,491.0,frozen,98.2,1.0,0.0
+,True,500,500,550,0.0,0,F7 stuck-at-zero I1 for 10 s,S1,none,,,,,,,
+,True,500,500,550,0.0,0,F7 stuck-at-zero I1 for 10 s,S1,MVG,False,,0.0,,7.8,0.0,0.0
+,True,1,1,27,0.0,0,F8 gross outlier Vdc=5 pu,S1,none,,,,,,,
+,True,0,1,11,0.7800000000000011,0,F8 gross outlier Vdc=5 pu,S1,MVG,True,0.0,1.0,implausible,100.0,1.0,0.0
+,True,1,1,51,0.0,0,F9 moderate outlier V1+0.2 pu,S1,none,,,,,,,
+,True,1,1,51,0.0,0,F9 moderate outlier V1+0.2 pu,S1,MVG,False,,0.0,,100.0,0.0,0.0
+k=750 t=15.00s LinAlgError: SVD did not converge,False,0,0,0,,0,"F2n dropout 0.5 s, noisy S6",S6,none,,,,,,,
+,True,0,25,0,,0,"F2n dropout 0.5 s, noisy S6",S6,MVG,True,0.0,25.0,nonfinite,100.0,1.0,0.0
+,True,500,500,550,0.0,0,"F6n frozen V1 10 s, noisy S6",S6,none,,,,,,,
+,True,9,500,9,,0,"F6n frozen V1 10 s, noisy S6",S6,MVG,True,0.17999999999999972,491.0,frozen,100.0,1.0,0.0

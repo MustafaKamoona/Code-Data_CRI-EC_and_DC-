@@ -1,0 +1,51 @@
+param,value,seed,criterion,score,availability
+alpha_y,1.0,1000,p95 25-step Vdc error [pu],0.0718736895552787,
+alpha_y,0.5,1000,p95 25-step Vdc error [pu],0.04752827176821763,
+alpha_y,0.3,1000,p95 25-step Vdc error [pu],0.044041322011364584,
+alpha_y,1.0,1001,p95 25-step Vdc error [pu],0.05206730051453725,
+alpha_y,0.5,1001,p95 25-step Vdc error [pu],0.05113535026133095,
+alpha_y,0.3,1001,p95 25-step Vdc error [pu],0.0750046898511219,
+alpha_y,1.0,1002,p95 25-step Vdc error [pu],0.04359429845102751,
+alpha_y,0.5,1002,p95 25-step Vdc error [pu],0.03200447850210484,
+alpha_y,0.3,1002,p95 25-step Vdc error [pu],0.02979872889501398,
+alpha_y,1.0,1003,p95 25-step Vdc error [pu],0.033716893014245915,
+alpha_y,0.5,1003,p95 25-step Vdc error [pu],0.027217208921270816,
+alpha_y,0.3,1003,p95 25-step Vdc error [pu],0.040953298170452256,
+alpha_y,1.0,1004,p95 25-step Vdc error [pu],0.051777521350607925,
+alpha_y,0.5,1004,p95 25-step Vdc error [pu],0.04855877499100401,
+alpha_y,0.3,1004,p95 25-step Vdc error [pu],0.04868069975666698,
+RTA_M_ret,25.0,1000,hard-limit violation samples,21.0,0.5242378810594702
+RTA_M_ret,25.0,1001,hard-limit violation samples,256.0,0.38630684657671166
+RTA_M_ret,25.0,1002,hard-limit violation samples,0.0,0.6836581709145427
+RTA_M_ret,25.0,1003,hard-limit violation samples,0.0,0.8995502248875562
+RTA_M_ret,25.0,1004,hard-limit violation samples,267.0,0.3493253373313343
+RTA_M_ret,50.0,1000,hard-limit violation samples,14.0,0.31334332833583206
+RTA_M_ret,50.0,1001,hard-limit violation samples,147.0,0.21989005497251374
+RTA_M_ret,50.0,1002,hard-limit violation samples,0.0,0.5237381309345327
+RTA_M_ret,50.0,1003,hard-limit violation samples,1.0,0.775112443778111
+RTA_M_ret,50.0,1004,hard-limit violation samples,195.0,0.28285857071464265
+RTA_M_ret,100.0,1000,hard-limit violation samples,3.0,0.1374312843578211
+RTA_M_ret,100.0,1001,hard-limit violation samples,100.0,0.0559720139930035
+RTA_M_ret,100.0,1002,hard-limit violation samples,15.0,0.08245877061469266
+RTA_M_ret,100.0,1003,hard-limit violation samples,9.0,0.5027486256871564
+RTA_M_ret,100.0,1004,hard-limit violation samples,162.0,0.16891554222888555
+CBF_gamma,0.1,1000,hard-limit violation samples,13.0,0.6416791604197901
+CBF_gamma,0.1,1001,hard-limit violation samples,0.0,0.7301349325337332
+CBF_gamma,0.1,1002,hard-limit violation samples,0.0,0.8630684657671164
+CBF_gamma,0.1,1003,hard-limit violation samples,8.0,0.6481759120439781
+CBF_gamma,0.1,1004,hard-limit violation samples,0.0,0.5147426286856571
+CBF_gamma,0.2,1000,hard-limit violation samples,4.0,0.8255872063968016
+CBF_gamma,0.2,1001,hard-limit violation samples,6.0,0.7471264367816092
+CBF_gamma,0.2,1002,hard-limit violation samples,0.0,0.9500249875062469
+CBF_gamma,0.2,1003,hard-limit violation samples,0.0,0.920039980009995
+CBF_gamma,0.2,1004,hard-limit violation samples,11.0,0.5722138930534733
+CBF_gamma,0.5,1000,hard-limit violation samples,2.0,0.9480259870064968
+CBF_gamma,0.5,1001,hard-limit violation samples,11.0,0.8025987006496752
+CBF_gamma,0.5,1002,hard-limit violation samples,0.0,0.968015992003998
+CBF_gamma,0.5,1003,hard-limit violation samples,0.0,0.9410294852573713
+CBF_gamma,0.5,1004,hard-limit violation samples,11.0,0.8120939530234883
+CBF_gamma,1.0,1000,hard-limit violation samples,0.0,0.9665167416291854
+CBF_gamma,1.0,1001,hard-limit violation samples,6.0,0.8025987006496752
+CBF_gamma,1.0,1002,hard-limit violation samples,0.0,0.9775112443778111
+CBF_gamma,1.0,1003,hard-limit violation samples,1.0,0.953023488255872
+CBF_gamma,1.0,1004,hard-limit violation samples,6.0,0.8235882058970515

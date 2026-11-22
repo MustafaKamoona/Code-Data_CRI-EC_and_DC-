@@ -1,0 +1,185 @@
+{
+ "created": "2026-11-20T00:58:56",
+ "python": "3.10.9",
+ "numpy": "2.2.6",
+ "scipy": "1.15.3",
+ "pandas": "2.3.3",
+ "platform": "Windows-10-10.0.19045-SP0",
+ "mvg": {
+  "y_lo": [
+   0.3,
+   0.3,
+   0.3,
+   -0.2,
+   -0.2,
+   -5.0,
+   -5.0
+  ],
+  "y_hi": [
+   1.7,
+   1.7,
+   1.7,
+   3.0,
+   3.0,
+   5.0,
+   5.0
+  ],
+  "tau_max": 0.03,
+  "frozen_L": 10,
+  "frozen_tol": 0.0,
+  "u_excitation_min": 1e-09,
+  "zero_exempt_channels": [
+   3,
+   4
+  ],
+  "zero_tol": 1e-09,
+  "channel_inputs": [
+   [
+    0,
+    1,
+    2,
+    3
+   ],
+   [
+    0,
+    1,
+    2,
+    3
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  "tau_fb_max": 0.2,
+  "recovery_samples": null,
+  "startup_requires_recovery": false
+ },
+ "recovery_samples_resolved": 40,
+ "seeds_ec": {
+  "S1": [
+   1
+  ],
+  "S2": [
+   1
+  ],
+  "S3": [
+   1
+  ],
+  "S4": [
+   1
+  ],
+  "S5": [
+   1
+  ],
+  "S6": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "S7": [
+   1
+  ],
+  "S8": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ]
+ },
+ "seeds_loso": {
+  "S1": [
+   1
+  ],
+  "S2": [
+   1
+  ],
+  "S3": [
+   1
+  ],
+  "S4": [
+   1
+  ],
+  "S5": [
+   1
+  ],
+  "S6": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "S7": [
+   1
+  ],
+  "S8": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "bit_identical_fault_free": true,
+ "runtime_s": 323.9,
+ "outputs": [
+  "r1c8_baseline_unchanged_code.csv",
+  "r1c8_coldstart_variant.csv",
+  "r1c8_equivalence_fault_free.csv",
+  "r1c8_fault_injection.csv",
+  "r1c8_frozen_safeguard_ablation.csv",
+  "r1c8_plausibility_envelope.csv",
+  "r1c8_recovery_length.csv",
+  "r1c8_run_metadata.json"
+ ]
+}

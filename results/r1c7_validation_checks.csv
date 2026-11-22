@@ -1,0 +1,11 @@
+check,passed,detail
+"3.1 runner bit-identical to sim.run_closed_loop (Direct, Hard-limit; S1-S8)",True,max |diff| = 0
+"3.2 nominal predictor exact on nominal plant (S1, one-step, k>=200)",True,max one-step error = 2.22e-16 pu
+3.3a RTA returns authority after exactly M_ret passing checks,True,"first s=1 at k=100 (predictor ready at k=1, M_ret=100)"
+3.3b RTA switches to fallback on the first failed check,True,"s before=1, s after forced failure=0"
+3.3c RTA monitor flags an unrecoverable command near the DC limit,True,"healthy state: pass=True (margin 0.0031); near-limit state: pass=False, first failing step=1, margin -0.0470"
+3.4a CBF passes a safe candidate unchanged,True,"dev=0.00e+00, status=0"
+3.4b CBF-QP equals analytic weighted projection onto the single active DC barrier,True,"|u*-u_analytic|_inf=5.55e-17, residual(u*)=0.0e+00, status=0"
+"3.4c CBF infeasible case: relaxation used, t* equals the analytic minimum (DC row)",True,"status=1, t*=0.13912, analytic=0.13912"
+"3.5a Protocol A: Direct/Hard-limit/EC-CRI reproduce results_strategy_comparison.csv (N_FA, E_V)",True,mismatches: []
+3.5b Protocol B: Direct/Hard-limit/EC-CRI/DC-CRI reproduce results_dc_cri_loso_perscenario.csv,True,mismatches: []

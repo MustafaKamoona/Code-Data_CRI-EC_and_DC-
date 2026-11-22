@@ -1,0 +1,9 @@
+variant,scenario,invalid_samples,first_invalid_t,reasons,A_c
+both safeguards (implemented),S7,0,,,0.45077461269365315
+both safeguards (implemented),S8,0,,,0.0075969612155137945
+no zero-current exemption,S7,0,,,0.45077461269365315
+no zero-current exemption,S8,0,,,0.0075969612155137945
+no excitation condition,S7,792,23.98,"frozen:V1,V2;frozen:V1,V2,Vdc;frozen:V1,V2,Vdc,I1,P_POI,Q_POI;frozen:V1,V2,Vdc,I1,Q_POI;frozen:V2",0.45077461269365315
+no excitation condition,S8,0,,,0.0075969612155137945
+neither,S7,792,23.98,"frozen:V1,V2;frozen:V1,V2,Vdc;frozen:V1,V2,Vdc,I1,I2,P_POI,Q_POI;frozen:V1,V2,Vdc,I1,P_POI,Q_POI;frozen:V1,V2,Vdc,I1,Q_POI;frozen:V2",0.45077461269365315
+neither,S8,0,,,0.0075969612155137945

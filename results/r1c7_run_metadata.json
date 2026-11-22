@@ -1,0 +1,171 @@
+{
+ "created": "2026-11-19T23:02:03",
+ "python": "3.10.9",
+ "numpy": "2.2.6",
+ "scipy": "1.15.3",
+ "pandas": "2.3.3",
+ "platform": "Windows-10-10.0.19045-SP0",
+ "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+ "predictor": {
+  "alpha_y": 0.5,
+  "alpha_d": 0.1
+ },
+ "rta": {
+  "horizon_steps": 25,
+  "return_dwell_steps": 100,
+  "tightening": {
+   "delta_V": 0.005,
+   "delta_dc": 0.008,
+   "delta_I": 0.02
+  }
+ },
+ "cbf": {
+  "gamma": 1.0,
+  "feas_tol": 1e-08,
+  "tightening": {
+   "delta_V": 0.005,
+   "delta_dc": 0.008,
+   "delta_I": 0.02
+  },
+  "modified_tol": 0.001,
+  "maxiter": 100,
+  "ftol": 1e-10
+ },
+ "dev_seeds": [
+  1000,
+  1001,
+  1002,
+  1003,
+  1004
+ ],
+ "seed_rep": 1,
+ "seeds_A_noisy": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "loso_eval_seeds": {
+  "S1": [
+   1
+  ],
+  "S2": [
+   1
+  ],
+  "S3": [
+   1
+  ],
+  "S4": [
+   1
+  ],
+  "S5": [
+   1
+  ],
+  "S6": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "S7": [
+   1
+  ],
+  "S8": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "H_principal": 25,
+ "Ts": 0.02,
+ "dc_cri_fold_params": "results/results_dc_cri_loso_folds.csv (unchanged, from notebook 13)",
+ "qp_solver": "scipy.optimize.minimize(method='SLSQP')",
+ "validation_checks": [
+  {
+   "check": "3.1 runner bit-identical to sim.run_closed_loop (Direct, Hard-limit; S1-S8)",
+   "passed": true,
+   "detail": "max |diff| = 0"
+  },
+  {
+   "check": "3.2 nominal predictor exact on nominal plant (S1, one-step, k>=200)",
+   "passed": true,
+   "detail": "max one-step error = 2.22e-16 pu"
+  },
+  {
+   "check": "3.3a RTA returns authority after exactly M_ret passing checks",
+   "passed": true,
+   "detail": "first s=1 at k=100 (predictor ready at k=1, M_ret=100)"
+  },
+  {
+   "check": "3.3b RTA switches to fallback on the first failed check",
+   "passed": true,
+   "detail": "s before=1, s after forced failure=0"
+  },
+  {
+   "check": "3.3c RTA monitor flags an unrecoverable command near the DC limit",
+   "passed": true,
+   "detail": "healthy state: pass=True (margin 0.0031); near-limit state: pass=False, first failing step=1, margin -0.0470"
+  },
+  {
+   "check": "3.4a CBF passes a safe candidate unchanged",
+   "passed": true,
+   "detail": "dev=0.00e+00, status=0"
+  },
+  {
+   "check": "3.4b CBF-QP equals analytic weighted projection onto the single active DC barrier",
+   "passed": true,
+   "detail": "|u*-u_analytic|_inf=5.55e-17, residual(u*)=0.0e+00, status=0"
+  },
+  {
+   "check": "3.4c CBF infeasible case: relaxation used, t* equals the analytic minimum (DC row)",
+   "passed": true,
+   "detail": "status=1, t*=0.13912, analytic=0.13912"
+  },
+  {
+   "check": "3.5a Protocol A: Direct/Hard-limit/EC-CRI reproduce results_strategy_comparison.csv (N_FA, E_V)",
+   "passed": true,
+   "detail": "mismatches: []"
+  },
+  {
+   "check": "3.5b Protocol B: Direct/Hard-limit/EC-CRI/DC-CRI reproduce results_dc_cri_loso_perscenario.csv",
+   "passed": true,
+   "detail": "mismatches: []"
+  }
+ ],
+ "runtime_s": 619.1,
+ "outputs": [
+  "r1c7_devset_selection.csv",
+  "r1c7_protocolA_aggregate_seed1.csv",
+  "r1c7_protocolA_noisy_20seed_summary.csv",
+  "r1c7_protocolA_perrun.csv",
+  "r1c7_protocolA_perscenario_seed1.csv",
+  "r1c7_protocolB_aggregate.csv",
+  "r1c7_protocolB_perrun.csv",
+  "r1c7_protocolB_perscenario.csv",
+  "r1c7_sensitivity_protocolB_aggregate.csv",
+  "r1c7_sensitivity_protocolB_perscenario.csv",
+  "r1c7_table_protocolA_aggregate.tex",
+  "r1c7_table_protocolB_aggregate.tex",
+  "r1c7_table_protocolB_perscenario.tex",
+  "r1c7_validation_checks.csv"
+ ]
+}
