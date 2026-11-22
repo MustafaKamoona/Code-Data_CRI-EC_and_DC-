@@ -96,7 +96,7 @@ class OFOVSCController:
 
     def propose_nominal_step(self, y_meas: np.ndarray) -> np.ndarray:
         """The full (kappa=1) update the OFO would apply, Delta_phi_k^nom
-        in the paper's notation -- a projected-gradient step on the
+        in the CRI notation -- a projected-gradient step on the
         tracking + sharing objective."""
         e_y = y_meas - self.y_target
         grad_u_track = self.J_model.T @ (self.w_y * e_y)
@@ -111,7 +111,7 @@ class OFOVSCController:
         return u_next - self.u
 
     def shadow_update(self, delta_u_nominal: np.ndarray, kappa_k: float):
-        """Apply the CRI-scaled internal parameter update, eq. (32):
+        """Apply the CRI-scaled internal parameter update (shadow adaptation):
         phi_{k+1} = phi_k + kappa_k * Delta_phi_k_nom. Runs every step,
         independent of s_k, so the candidate stays warmed up while
         de-activated."""
@@ -119,5 +119,5 @@ class OFOVSCController:
 
 
 def blend_command(u_safe: np.ndarray, u_candidate: np.ndarray, s_k: int, kappa_k: float) -> np.ndarray:
-    """Eq. (38): u_k = u_safe + s_k * kappa_k * (pi_phi_k - u_safe)."""
+    """Authority blending: u_k = u_safe + s_k * kappa_k * (pi_phi_k - u_safe)."""
     return u_safe + float(s_k) * float(kappa_k) * (u_candidate - u_safe)

@@ -1,5 +1,5 @@
-"""Readiness/activation metrics and control/disturbance metrics (Sec. V of
-the paper), plus a few simulation-level metrics (unsafe active fraction,
+"""Readiness/activation metrics and control/disturbance metrics used in the
+evaluation, plus a few simulation-level metrics (unsafe active fraction,
 probe energy, min/max signal envelopes) that make the notebook result
 tables self-explanatory to a reader.
 """
@@ -121,12 +121,12 @@ def recovery_time(t, cls_code, event_end_time, activate_code=3) -> float:
     return detection_delay(t, cls_code, event_end_time, activate_code - 0.5, direction="above")
 
 
-# --- Finite-horizon activation-risk metrics (CRI_Main_Paper_V2.tex, DC-CRI) -
+# --- Finite-horizon activation-risk metrics (DC-CRI) ----------------------
 # These use the finite-horizon label z_k^(H) (dc_calibration.finite_horizon_label),
 # not the instantaneous/multi-mechanism z_k^unsafe used by the original
 # false_activation_count/unsafe_active_fraction above.
 def false_activation_count_horizon(s, z_H, eps=1e-9) -> int:
-    """N_FA^(H) = sum_k s_k * z_k^(H) (Eq. false_activation_horizon)."""
+    """N_FA^(H) = sum_k s_k * z_k^(H) (finite-horizon false-activation count)."""
     s, z = np.asarray(s), np.asarray(z_H)
     return int(np.sum((s == 1) & (z == 1)))
 
@@ -148,5 +148,5 @@ def fdr(s, z_H, eps=1e-9) -> float:
 
 
 def controller_availability(s) -> float:
-    """A_c = mean_k(s_k) (Eq. controller_availability)."""
+    """A_c = mean_k(s_k) (controller availability)."""
     return float(np.mean(np.asarray(s, dtype=float)))

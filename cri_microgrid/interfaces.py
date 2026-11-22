@@ -30,7 +30,7 @@ import numpy as np
 @runtime_checkable
 class CandidateControllerProtocol(Protocol):
     """The adaptive/learning/optimization-driven controller the CRI
-    supervises (pi_phi in the paper's notation)."""
+    supervises (pi_phi in the CRI notation)."""
 
     def candidate_command(self) -> np.ndarray:
         """Return pi_phi_k(y_k, r_k, D_k): the command implied by the
@@ -39,7 +39,7 @@ class CandidateControllerProtocol(Protocol):
         ...
 
     def propose_nominal_step(self, y_meas: np.ndarray) -> np.ndarray:
-        """Return Delta_phi_k^nom (Eq. 37): the FULL (kappa=1) internal
+        """Return Delta_phi_k^nom: the FULL (kappa=1) internal
         update your controller would apply given the just-measured output,
         expressed in the same units/space as candidate_command()'s return
         value (e.g. if candidate_command() returns a setpoint vector, this
@@ -48,7 +48,7 @@ class CandidateControllerProtocol(Protocol):
         ...
 
     def shadow_update(self, delta_nominal: np.ndarray, kappa_k: float) -> None:
-        """Apply state += kappa_k * delta_nominal (Eq. 37). Called every
+        """Apply state += kappa_k * delta_nominal (shadow adaptation). Called every
         step regardless of the activation status s_k -- this is the
         "shadow learning" that keeps your controller warmed up while
         de-activated. If your controller does not want CRI-scaled shadow
@@ -99,7 +99,7 @@ class PlantProtocol(Protocol):
 
 # MarginFn: Callable[[np.ndarray, np.ndarray, Any], List[float]]
 #   margin_fn(y_meas, u_applied, cons) -> [psi_1, ..., psi_ng]
-#   One normalized margin per operational constraint (Eq. 22-23): each
+#   One normalized margin per operational constraint (safety-margin index): each
 #   psi_ell should be near 1 when comfortably inside the limit and near or
 #   below 0 at/beyond it. SMI = min_ell sat_[0,1](psi_ell) is taken by
 #   cri.compute_SMI() -- you only need to supply the list of margins.

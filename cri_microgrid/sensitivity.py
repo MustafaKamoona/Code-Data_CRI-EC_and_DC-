@@ -1,5 +1,5 @@
-"""Local, measurement-driven input-output sensitivity estimation (Eq. 15-17
-of the paper). S_hat is never treated as a plant model; it is only used to
+"""Local, measurement-driven input-output sensitivity estimation
+(weighted, regularized least squares). S_hat is never treated as a plant model; it is only used to
 assess readiness (responsiveness/coupling) from the current data window.
 """
 from dataclasses import dataclass
@@ -65,7 +65,7 @@ def estimate_sensitivity(delta_u_norm: np.ndarray, delta_y_norm: np.ndarray,
 
 
 def coupling_raw(S_hat: np.ndarray, eps0: float = 1e-9) -> float:
-    """c_k, Eq. (20): column-normalized off-diagonal-vs-peak energy ratio.
+    """c_k: column-normalized off-diagonal-vs-peak energy ratio.
 
     A near-zero S_hat (no informative excitation, e.g. a fully saturated
     actuator) carries no evidence either way about coupling; conservatively

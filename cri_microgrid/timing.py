@@ -3,9 +3,9 @@ theoretical complexity O(n_y n_u N + n_u^2 N + n_u^3) to measured wall-clock
 cost as a function of the window length N and the input dimension n_u.
 
 Benchmarks `sensitivity.estimate_sensitivity` directly (not the full
-CRISupervisor.step) because the paper is explicit that this is the
-dominant operation -- "the remaining indicator and decision calculations
-require only vector operations and threshold comparisons" (Sec. III-D) --
+CRISupervisor.step) because it is the dominant operation -- the
+remaining indicator and decision calculations require only vector
+operations and threshold comparisons --
 and because the microgrid-specific margin formulas in cri.py are fixed to
 n_u=4, n_y=7 and cannot be swept over arbitrary dimensions.
 """

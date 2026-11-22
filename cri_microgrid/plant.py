@@ -12,7 +12,7 @@ Physics summary (per-unit, linearized-DistFlow-style averaged model):
     a DC load, and the AC-side power drawn by both VSCs.
   - Feeder current is the apparent power over voltage, I_i = S_i / V_i.
 
-Critical design rule for this paper's claims: the plant may know and expose
+Critical design rule of this framework: the plant may know and expose
 everything (topology, true actuator gain, true noise level, true drift) via
 `hidden_truth`, but that dictionary is consumed ONLY by validation.py to
 build simulation-only ground-truth labels. controllers.py and cri.py never
@@ -166,7 +166,7 @@ class HybridACDCPlant:
         # Euler, this is unconditionally stable for any Ts/tau ratio, which
         # matters here because tau_p/tau_q/tau_v are deliberately set fast
         # relative to Ts (see PlantParams) to keep the supervisory sample
-        # close to the paper's quasi-static regime -- forward Euler would
+        # close to the quasi-static regime assumed by the CRI -- forward Euler would
         # diverge outright once Ts/tau > 1.
         ap = 1.0 - np.exp(-Ts / p.tau_p)
         aq = 1.0 - np.exp(-Ts / p.tau_q)

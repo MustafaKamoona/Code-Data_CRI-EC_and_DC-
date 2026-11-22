@@ -1,4 +1,4 @@
-"""Safe micro-probing (Eq. 11-14): a deterministic, repeatable bounded
+"""Safe micro-probing: a deterministic, repeatable bounded
 excitation sequence, scaled down automatically by the current safety margin
 so that probing intensity is self-limiting near operational constraints.
 """
@@ -43,7 +43,7 @@ def generate_probe(k: int, n_u: int, period_steps: int, channel_scale: np.ndarra
 
 
 def scale_probe_with_smi(delta_max: float, smi_k: float) -> float:
-    """Eq. (13): delta_bar_k = delta_max * SMI_k -- probing is automatically
+    """Probe amplitude delta_bar_k = delta_max * SMI_k -- probing is automatically
     attenuated as the operating point approaches a constraint."""
     return float(delta_max) * float(np.clip(smi_k, 0.0, 1.0))
 
@@ -51,7 +51,7 @@ def scale_probe_with_smi(delta_max: float, smi_k: float) -> float:
 def check_actuator_bounds(u_k: np.ndarray, delta_u: np.ndarray,
                            u_min: np.ndarray, u_max: np.ndarray) -> np.ndarray:
     """Clip delta_u so that u_k + delta_u stays within [u_min, u_max]
-    (Eq. 12's feasible probing set P_k)."""
+    (the feasible probing set P_k)."""
     lo = u_min - u_k
     hi = u_max - u_k
     return np.clip(delta_u, lo, hi)

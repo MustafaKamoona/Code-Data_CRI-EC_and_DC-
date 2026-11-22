@@ -7,7 +7,7 @@ OFO parameters, same random seed):
   'direct'    : s_k=1, kappa_k=1 always -- the candidate always drives the plant.
   'threshold' : a conventional hard-limit rule-based supervisor -- active iff
                 every instantaneous constraint margin is currently satisfied.
-  'cri'       : the full CRI-supervised activation of Algorithm 1.
+  'cri'       : the full CRI-supervised activation loop.
 """
 from collections import deque
 from dataclasses import dataclass
@@ -171,8 +171,8 @@ def run_closed_loop(scenario: Scenario, plant_params: PlantParams, ctrl_params: 
         log["kappa"][k] = kappa_k
         log["cls_code"][k] = _CLASS_CODE[cls]
         log["probe_bar"][k] = probe_bar
-        # Infinity norm, matching the paper's actual probing bound
-        # ||delta u||_inf <= delta_bar_k (Eq. 12) -- an L2 norm here would
+        # Infinity norm, matching the actual probing bound
+        # ||delta u||_inf <= delta_bar_k -- an L2 norm here would
         # let a 4-channel probe exceed delta_bar_k by up to a factor of 2.
         log["probe_norm"][k] = float(np.max(np.abs(probe_vec)))
 
@@ -244,10 +244,10 @@ def run_closed_loop_generic(scenario: Scenario, cri_params: CRIParams, probe_par
                                   function -- only `margin_fn` and your own
                                   controllers interpret it.
     margin_fn(y_meas, u_applied, cons) -> List[float] : your normalized
-                                  constraint margins (Eq. 22-23); required
+                                  constraint margins (safety-margin index); required
                                   for the 'cri' and 'threshold' strategies.
     D_u, D_y                   : representative per-channel scales for
-                                  normalization (Eq. 10); default to all-ones.
+                                  normalization (D_u, D_y scaling); default to all-ones.
     u_bounds                   : (u_min, u_max) arrays, length n_u; default
                                   to +/- inf (no probing clipping).
 

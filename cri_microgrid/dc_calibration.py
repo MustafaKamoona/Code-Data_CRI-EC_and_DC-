@@ -1,9 +1,8 @@
 """Data-Calibrated CRI (DC-CRI): risk-aware, data-driven calibration of the
 CRI indicator weights omega and supervisory thresholds eta_A/eta_M/eta_D,
-implementing exactly the procedure of CRI_Main_Paper_V2.tex Sec. "Risk-Aware
-Calibration of CRI Parameters" (Eqs. weight_calibration, risk_constrained_threshold,
-relative_thresholds) and the finite-horizon activation-risk label (Eq.
-finite_horizon_hazard).
+implementing the risk-aware calibration procedure (class-normalized weight
+calibration on the simplex, risk-constrained activation threshold, and relative
+Monitor/Delay margins) and the finite-horizon activation-risk label z_k^(H).
 
 Nothing here changes the online CRI architecture: CRISupervisor, cri.py,
 sensitivity.py, and probing.py are used completely unmodified. DC-CRI is
@@ -23,12 +22,12 @@ INDICATOR_ORDER = ["RI", "CI", "SMI", "AI", "NCI"]
 
 
 # =============================================================================
-# Finite-horizon activation-risk label (Eq. finite_horizon_hazard)
+# Finite-horizon activation-risk label z_k^(H)
 # =============================================================================
 def hard_limit_violation(log: Dict[str, np.ndarray], cons: ConstraintParams) -> np.ndarray:
     """Pointwise indicator of q_k outside the hard operational safe set Q_s
-    (Eq. operational_safe_set): true electrical limits only -- bus voltages,
-    feeder currents, and DC-link voltage (Eqs. voltage/current/dc_voltage_constraints).
+    true electrical limits only -- bus voltages,
+    feeder currents, and DC-link voltage.
     Actuator/setpoint-box limits are excluded: staying inside the P/Q box is
     an actuator-headroom margin (already captured by SMI's psi_u term), not
     a physical plant-safety violation in the same sense as V/I/Vdc.
@@ -47,7 +46,7 @@ def hard_limit_violation(log: Dict[str, np.ndarray], cons: ConstraintParams) -> 
 
 
 def finite_horizon_label(log: Dict[str, np.ndarray], cons: ConstraintParams, H: int) -> np.ndarray:
-    """z_k^(H), Eq. finite_horizon_hazard: 1 iff the hard-limit violation
+    """z_k^(H), the finite-horizon hazard label: 1 iff the hard-limit violation
     indicator is true at any sample j in {0,...,H} after k (inclusive of k
     itself). Implemented as a reverse (right-to-left) rolling-OR over the
     pointwise violation indicator, so it is exact (not an approximation) and
@@ -117,7 +116,7 @@ def label_for_horizon(traj: TrajectoryData, H: int) -> np.ndarray:
 
 
 # =============================================================================
-# Weight calibration (Eq. weight_calibration): risk-weighted least squares
+# Weight calibration: risk-weighted least squares
 # on the probability simplex
 # =============================================================================
 @dataclass
@@ -134,7 +133,7 @@ class WeightCalibrationResult:
 
 def calibrate_weights(Gamma: np.ndarray, z: np.ndarray, lambda_H: float,
                        omega0: Optional[np.ndarray] = None) -> WeightCalibrationResult:
-    """Solve Eq. weight_calibration:
+    """Solve the weight-calibration problem:
         omega* = argmin_omega (1/|Is|) sum_{Is} (1 - omega.Gamma_k)^2
                               + lambda_H (1/|Ih|) sum_{Ih} (omega.Gamma_k)^2
         s.t. omega >= 0, 1^T omega = 1
@@ -178,14 +177,14 @@ def calibrate_weights(Gamma: np.ndarray, z: np.ndarray, lambda_H: float,
 
 # =============================================================================
 # Offline reconstruction of the dynamic CRI filter for arbitrary omega
-# (Eqs. instantaneous_cri, adaptive_beta, dynamic_CRI) -- pure post-processing,
+# (instantaneous CRI, adaptive beta_k, dynamic CRI filter) -- pure post-processing,
 # identical formulas to cri.py, reused here to avoid re-deriving beta_k.
 # =============================================================================
 def reconstruct_cri_trajectory(traj: TrajectoryData, omega: np.ndarray, crip: CRIParams,
                                 cri0: float = 0.5) -> np.ndarray:
     """CRI_k for one trajectory under a candidate omega, using the SAME
     sigma_hat_sq (hence beta_k) already produced by the original closed-loop
-    run -- beta_k does not depend on omega (Eq. adaptive_beta), so this is an
+    run -- beta_k does not depend on omega, so this is an
     exact, not approximate, reconstruction of what CRISupervisor.step() would
     have computed for this omega, given the same Gamma_k/sigma_hat_sq stream."""
     n = len(traj.sigma_hat_sq)
@@ -201,7 +200,7 @@ def reconstruct_cri_trajectory(traj: TrajectoryData, omega: np.ndarray, crip: CR
 
 
 # =============================================================================
-# Risk-constrained activation threshold (Eq. risk_constrained_threshold)
+# Risk-constrained activation threshold eta_A*
 # =============================================================================
 @dataclass
 class ThresholdCalibrationResult:
@@ -252,7 +251,7 @@ def calibrate_activation_threshold(CRI: np.ndarray, z: np.ndarray, eps_risk: flo
 
 
 # =============================================================================
-# Monitor/Delay margins (Eq. relative_thresholds): grid search minimizing
+# Monitor/Delay margins (eta_M = eta_A* - Delta_M, eta_D = eta_A* - Delta_D): grid search minimizing
 # supervisory switching, subject to 0 < Delta_M < Delta_D < eta_A*
 # =============================================================================
 def _classify(cri: np.ndarray, eta_A: float, eta_M: float, eta_D: float) -> np.ndarray:
@@ -324,7 +323,7 @@ def calibrate_dc_cri(trajectories: List[TrajectoryData], H: int, eps_risk: float
                       lambda_H: float, crip_template: CRIParams,
                       cri0: float = 0.5) -> CalibrationOutcome:
     """End-to-end calibration (weights, then thresholds) on a pooled set of
-    calibration trajectories, exactly implementing Algorithm 1's per-fold
+    calibration trajectories, exactly implementing the LOSO procedure's per-fold
     calibration steps (everything except the final held-out evaluation,
     which is a genuine closed-loop simulation done by the caller)."""
     Gamma_all = np.concatenate([t.Gamma for t in trajectories], axis=0)

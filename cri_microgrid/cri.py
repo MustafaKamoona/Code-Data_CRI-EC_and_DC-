@@ -2,17 +2,17 @@
 combination into a bounded scalar, dynamic (recursive) filtering, readiness
 classification, adaptation scaling, and the digital-twin escalation flag.
 
-Every equation from the paper is implemented as its own small, pure
+Every equation of the CRI formulation is implemented as its own small, pure
 function (no equation is buried inside a larger opaque routine), so each
-one is independently testable and directly traceable back to the
-manuscript. `CRISupervisor` is the only stateful object in this module: it
+one is independently testable and directly traceable to the formulation.
+`CRISupervisor` is the only stateful object in this module: it
 owns the moving-data windows and the previous-step values the recursive
-formulas need, and orchestrates the pure functions in the same order as
-Algorithm 1 of the paper.
+formulas need, and orchestrates the pure functions in the order of the
+per-sample CRI supervision loop.
 
 CRI blindness: CRISupervisor.step() takes only (u_applied, y_measured,
 constraints) -- never the plant object, never hidden_truth. This is what
-makes the "measurement-driven" claim in the paper enforceable in code
+makes the "measurement-driven" property enforceable in code
 rather than just asserted in prose.
 """
 from collections import deque
@@ -50,7 +50,7 @@ def compute_SMI(psi_list: List[float]) -> float:
 
 def microgrid_margins(y_meas: np.ndarray, u_applied: np.ndarray, cons: ConstraintParams,
                        eps0: float = 1e-9) -> List[float]:
-    """psi_V, psi_I, psi_dc, psi_u for the microgrid case study (Sec. IV-B)."""
+    """psi_V, psi_I, psi_dc, psi_u for the hybrid AC/DC microgrid case study."""
     V1, V2, Vdc, I1, I2 = y_meas[0], y_meas[1], y_meas[2], y_meas[3], y_meas[4]
     P1, Q1, P2, Q2 = u_applied[0], u_applied[1], u_applied[2], u_applied[3]
 
@@ -200,10 +200,10 @@ class CRISupervisor:
                  cri0: float = 0.5, n_u: int = 4, n_y: int = 7,
                  margin_fn: Optional[Callable[[np.ndarray, np.ndarray, ConstraintParams], List[float]]] = None):
         """margin_fn(y_meas, u_applied, cons) -> list of normalized margins
-        psi_ell,k, one per operational constraint (Eq. 22-23). Defaults to
-        the microgrid-specific `microgrid_margins` (Sec. IV-B); pass your
+        psi_ell,k, one per operational constraint (safety-margin index). Defaults to
+        the microgrid-specific `microgrid_margins`; pass your
         own to reuse the CRI engine on a different plant/system -- see
-        cri_microgrid/interfaces.py and notebooks/11_bring_your_own.ipynb."""
+        cri_microgrid/interfaces.py and notebooks/12_bring_your_own.ipynb."""
         self.p = params
         self.D_u = np.asarray(D_u if D_u is not None else DEFAULT_D_u, dtype=float)
         self.D_y = np.asarray(D_y if D_y is not None else DEFAULT_D_y, dtype=float)
@@ -229,7 +229,7 @@ class CRISupervisor:
     @property
     def smi_for_probing(self) -> float:
         """Last computed SMI_k, used by sim.py to size THIS step's probe
-        amplitude via Eq. (13) before the command is actually applied."""
+        amplitude (delta_bar_k = delta_max * SMI_k) before the command is actually applied."""
         return self.smi_prev
 
     def step(self, u_applied: np.ndarray, y_meas: np.ndarray, cons: ConstraintParams) -> CRIStepResult:

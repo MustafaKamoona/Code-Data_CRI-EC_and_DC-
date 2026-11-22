@@ -11,7 +11,7 @@ their nominal magnitude (1.0 pu), P/Q setpoints are normalized to a VSC's
 rated apparent power, and feeder currents are normalized to the feeder's
 rated current. This keeps every figure and every CRI computation
 dimensionless, matching the D_u^-1, D_y^-1 normalization used throughout the
-paper's readiness formulas.
+readiness formulas.
 """
 from dataclasses import dataclass, field
 from typing import Optional, Sequence, Tuple, List, Dict, Any
@@ -44,7 +44,7 @@ class PlantParams:
 
     # Time constants are set fast relative to Ts (supervisory sample time)
     # so that, from the readiness layer's perspective, one sample is close
-    # to the paper's quasi-static assumption (Sec III-C): the plant has
+    # to the quasi-static assumption of the CRI formulation: the plant has
     # essentially settled to a Delta u before the next Delta u is applied,
     # so the local Delta y ~= S*Delta u regression is a physically sound
     # local linearization rather than fighting first-order lag dynamics.
@@ -101,7 +101,7 @@ class ConstraintParams:
     Vdc_max: float = 1.08
     # Asymmetric P box (converters export far more often than they import):
     # centered close to the nominal per-VSC dispatch point so the actuator
-    # headroom margin (which, by the paper's own min(headroom-fraction)
+    # headroom margin (which, by its own min(headroom-fraction)
     # formula, structurally tops out at 0.5 exactly at the box center)
     # actually reaches close to that ceiling under healthy nominal
     # operation, rather than being permanently starved by an off-center box.
@@ -220,7 +220,7 @@ class CRIParams:
 
     # --- Decision thresholds ---
     # Calibrated against this plant's own achievable nominal ceiling: the
-    # paper's own actuator-margin formula (Sec. IV-B) structurally caps SMI
+    # actuator-margin formula (cri.microgrid_margins) structurally caps SMI
     # at 0.5 even at the best possible operating point (it is a min of two
     # headroom fractions that always sum to 1), and the shared-POI terms in
     # the microgrid output vector give the Coupling Index an honest

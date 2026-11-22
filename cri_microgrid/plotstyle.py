@@ -1,5 +1,5 @@
 """Shared IEEE-style figure formatting and a single validated color system
-used by every notebook, so all eight paper figures read as one visual
+used by every notebook, so all figures read as one visual
 family. Colors are taken unmodified from a pre-validated categorical /
 status / sequential / diverging palette (CVD-safe adjacent pairs, checked
 contrast) -- see the dataviz palette this project's figures were built
@@ -58,8 +58,8 @@ CAT = {
     "magenta": "#e87ba4", "green": "#008300", "violet": "#4a3aa7", "red": "#e34948",
 }
 
-# The five readiness indicators, in the fixed order they're introduced in
-# the paper (RI, CI, SMI, AI, NCI); CRI itself gets a visually distinct,
+# The five readiness indicators, in their fixed order
+# (RI, CI, SMI, AI, NCI); CRI itself gets a visually distinct,
 # unused-elsewhere hue since it is the headline aggregate, not a sixth peer.
 INDICATOR_COLORS = {
     "RI": CAT["blue"], "CI": CAT["orange"], "SMI": CAT["aqua"],

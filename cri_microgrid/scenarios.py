@@ -1,4 +1,4 @@
-"""Scenario builders S1-S8 (Table II of the paper) plus the S9 parameter-
+"""Scenario builders S1-S8 (the eight stress scenarios) plus the S9 parameter-
 sweep and S10 statistical-validation helpers. Each scenario is a bundle of
 time-varying callables (exogenous inputs, true actuator gain, true
 topology, noise config) that sim.py's master loop consumes generically --
