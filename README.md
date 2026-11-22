@@ -855,6 +855,7 @@ Cyber prOtectiON for modern power grids) under Grant 101120221 and SUNRISE under
 **Mustafa A. Kamoona** -- Department of Electrical Engineering, Universidad de Sevilla, Seville, Spain
 Email: muskam@alum.us.es, mustafazzasim@gmail.com
 
-**Juan Manuel Mauricio** -- Department of Electrical Engineering, Universidad de Sevilla, Seville, Spain
+**Prof. Juan Manuel Mauricio** -- Department of Electrical Engineering, Universidad de Sevilla, Seville, Spain
+ORCID: [0000-0002-5702-0198](https://orcid.org/0000-0002-5702-0198)
 
 For questions, issues, or collaboration inquiries, please open a GitHub issue on this repository.
